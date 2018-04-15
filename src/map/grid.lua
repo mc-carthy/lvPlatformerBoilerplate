@@ -21,6 +21,11 @@ local function createLevel(self, level)
     end
 end
 
+local function isSolid(self, x, y)
+    print(math.floor(y / cell_size) .. '-' .. math.floor(x / cell_size))
+    return self.grid[math.floor(y / cell_size) + 1][math.floor(x / cell_size) + 1] == 'x'
+end
+
 local function draw(self)
     for y = 1, #self.grid do
         for x = 1, #self.grid[y] do
@@ -35,12 +40,16 @@ local function draw(self)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function grid.create()
+function grid.create(entityManager)
     local inst = {}
 
+    inst.entityManager = entityManager
+    inst.tag = 'grid'
     inst.grid = {}
 
     createLevel(inst, level1)
+
+    inst.isSolid = isSolid
 
     inst.draw = draw
 

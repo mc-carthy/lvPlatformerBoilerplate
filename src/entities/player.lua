@@ -4,6 +4,12 @@ local moveSpeed = 200
 local jumpSpeed = -25
 local gravity = 100
 
+local function _checkCollision(self)
+    if self.entityManager:getGrid():isSolid(self.x + self.w, self.y + self.h + self.vy) or self.entityManager:getGrid():isSolid(self.x, self.y + self.h + self.vy) then
+        self.isGrounded = true
+    end
+end
+
 local function _applyGravity(self, dt)
     if not self.isGrounded then
         self.vy = self.vy + gravity * dt
@@ -32,12 +38,13 @@ end
 
 local function update(self, dt)
     _getInput(self, dt)
-    if self.y < love.graphics.getHeight() - 100 then
+    if self.y < love.graphics.getHeight() - 50 and not self.isGrounded then
         _applyGravity(self, dt)
     else
         self.isGrounded = true
         self.vy = 0
     end
+    _checkCollision(self, dt)
 end
 
 local function draw(self)
@@ -48,9 +55,11 @@ local function draw(self)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function player.create(x, y)
+function player.create(entityManager, x, y)
     local inst = {}
 
+    inst.entityManager = entityManager
+    inst.tag = 'player'
     inst.x = x or 0
     inst.y = y or 0
     inst.w = 20

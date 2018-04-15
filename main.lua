@@ -1,19 +1,19 @@
+local EntityManager = require('src.entities.entityManager')
 local Grid = require('src.map.grid')
 local Player = require('src.entities.player')
 
 function love.load()
-    grid = Grid.create()
-    player = Player.create(100, love.graphics.getHeight() - 100)
+    entityManager = EntityManager.create()
+    entityManager:addEntity(Grid.create(entityManager))
+    entityManager:addEntity(Player.create(entityManager, 100, love.graphics.getHeight() - 100))
 end
 
 function love.update(dt)
-    player:update(dt)
+    entityManager:update(dt)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(63, 63, 63, 255)
-    grid:draw()
-    player:draw()
+    entityManager:draw()
 end
 
 function love.keypressed(key)
