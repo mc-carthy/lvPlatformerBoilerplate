@@ -3,6 +3,7 @@ function love.conf(t)
     t.window.height = 600
     t.window.title = 'LÖVE Platformer'
     t.window.icon = nil
+    t.window.vsync = false
 
     t.modules.audio = true
     t.modules.event = true

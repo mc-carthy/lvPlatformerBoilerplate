@@ -35,6 +35,9 @@ local function draw(self)
                 love.graphics.setColor(0, 127, 191, 255)
             end
             love.graphics.rectangle('fill', (x - 1) * cell_size, (y - 1) * cell_size, cell_size, cell_size)
+            love.graphics.setColor(0, 0, 0, 255)
+            -- love.graphics.rectangle('line', (x - 1) * cell_size, (y - 1) * cell_size, cell_size, cell_size)
+            -- love.graphics.print('y:' .. y .. ' x:' .. x , (x - 1) * cell_size, (y - 1) * cell_size, 0, 0.5, 0.5)
         end
     end
     love.graphics.setColor(255, 255, 255, 255)
