@@ -34,10 +34,6 @@ local _verticalCollision = function(self, dt, input)
 end
 
 local function _checkCollision(self, dt)
-    -- if self.entityManager:getGrid():isSolid(self.x + self.w, self.y + self.h + self.vy) or self.entityManager:getGrid():isSolid(self.x, self.y + self.h + self.vy) then
-    --     self.vy = 0
-    --     self.isGrounded = true
-    -- end
     _horizontalCollision(self, dt)
     _verticalCollision(self, dt)
 end
