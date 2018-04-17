@@ -22,8 +22,11 @@ local function createLevel(self, level)
 end
 
 local function isSolid(self, x, y)
-    print(math.floor(y / cell_size) .. '-' .. math.floor(x / cell_size))
-    return self.grid[math.floor(y / cell_size) + 1][math.floor(x / cell_size) + 1] == 'x'
+    if self.grid[math.floor(y / cell_size) + 1] and self.grid[math.floor(y / cell_size) + 1][math.floor(x / cell_size) + 1] then
+        return self.grid[math.floor(y / cell_size) + 1][math.floor(x / cell_size) + 1] == 'x'
+    else
+        return true
+    end
 end
 
 local function draw(self)
